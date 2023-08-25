@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Text, TouchableOpacity } from "react-native";
+import { ImageBackground, View, Text, TouchableOpacity } from "react-native";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Modal from "react-native-modal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Link, router } from "expo-router";
+import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 const initialSentences = [
     "рак",
@@ -94,16 +96,50 @@ const ConstructWords = () => {
         setIsModalVisible(true);
 
         setModalContent(
-            <View>
-                <Text>{isAnswerCorrect ? "Correct!" : "Try Again"}</Text>
-                <Text>The answer is: {correctOrder.join(" ")}</Text>
+            <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: isAnswerCorrect ? "aqua" : "#e64a19",
+                    borderRadius: 80,
+                    width: 140,
+                    height: 140,
+                    padding: 30,
+                    alignSelf: "center",
+                    shadowColor: "#000000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 10,
+                    },
+                    shadowOpacity: 0.17,
+                    shadowRadius: 3.05,
+                    elevation: 10,
+                }}
+            >
+                <Text>
+                    {isAnswerCorrect ? (
+                        <Entypo name="emoji-happy" size={34} color="white" />
+                    ) : (
+                        <Entypo name="emoji-neutral" size={34} color="white" />
+                    )}
+                </Text>
                 {sentenceNumber < 5 ? (
                     <TouchableOpacity onPress={() => nextSentence()}>
-                        <Text>Next</Text>
+                        <AntDesign
+                            name="rightcircleo"
+                            size={22}
+                            style={{ marginTop: 8 }}
+                            color="white"
+                        />
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity onPress={back}>
-                        <Text>Close</Text>
+                        <AntDesign
+                            name="leftcircleo"
+                            size={22}
+                            style={{ marginTop: 8 }}
+                            color="white"
+                        />
                     </TouchableOpacity>
                 )}
             </View>
@@ -127,23 +163,35 @@ const ConstructWords = () => {
     const renderItem = ({ item, index, drag, isActive }) => (
         <TouchableOpacity
             style={{
-                backgroundColor: isActive ? "red" : "white",
+                backgroundColor: isActive ? "#e91e63;" : "white",
                 padding: 10,
                 paddingLeft: 18,
                 paddingRight: 18,
                 margin: 10,
+                borderRadius: 10,
+                shadowColor: "#000000",
+                shadowOffset: {
+                    width: 0,
+                    height: 10,
+                },
+                shadowOpacity: 0.17,
+                shadowRadius: 3.05,
+                elevation: 10,
             }}
             onLongPress={isModalVisible ? undefined : drag} // Disable dragging when the modal is visible
         >
             <Text
                 style={{
                     fontSize: 22,
+                    color: "#03a9f4",
                 }}
             >
                 {item.label}
             </Text>
         </TouchableOpacity>
     );
+
+    const image = {uri: '../assets/toys-hand-drawn-seamless-pattern-toys-endless-sketch-drawing-texture-childish-background-part-of-set-2BW75R7.jpg'};
 
     return (
         <View
@@ -153,58 +201,86 @@ const ConstructWords = () => {
                 justifyContent: "center",
             }}
         >
-            {sentences.length > 0 ? (
-                <>
-                    <Text
+            <ImageBackground
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    justifyContent: "center",
+                }}
+                source={image}
+                resizeMode="cover"
+            >
+                {sentences.length > 0 ? (
+                    <View
                         style={{
+                            backgroundColor: "red",
+                            padding: 30,
+                            width: 290,
+                            height: 290,
+                            borderRadius: 150,
                             alignSelf: "center",
+                            backgroundColor: "#f2f2f2",
                         }}
                     >
-                        Склади слово: <span>{currentWordToConstruct}</span>
-                    </Text>
-                    <GestureHandlerRootView>
-                        <DraggableFlatList
-                            data={jumbledWords}
-                            renderItem={renderItem}
-                            horizontal
-                            keyExtractor={(item) => item.key}
-                            onDragEnd={({ data }) => setJumbledWords(data)}
-                            style={{
-                                alignSelf: "center",
-                                margin: 18,
-                            }}
-                        />
-                    </GestureHandlerRootView>
-                    <TouchableOpacity onPress={() => checkAnswer()}>
                         <Text
                             style={{
                                 alignSelf: "center",
-                                width: 50,
-                                height: 50,
-                                backgroundColor: "aqua",
-                                shadowColor: "#000000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 30,
-                                },
-                                shadowOpacity: 0.17,
-                                shadowRadius: 3.05,
-                                elevation: 4,
-                                borderRadius: 50,
-                                margin: "auto",
                             }}
-                        ></Text>
-                    </TouchableOpacity>
-                </>
-            ) : (
-                <Text>No more sentences to arrange.</Text>
-            )}
+                        >
+                            Склади слово:{" "}
+                            <Text
+                                style={{
+                                    alignSelf: "center",
+                                    color: "#ff5722",
+                                    fontSize: 28,
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                {currentWordToConstruct}
+                            </Text>
+                        </Text>
+                        <GestureHandlerRootView>
+                            <DraggableFlatList
+                                data={jumbledWords}
+                                renderItem={renderItem}
+                                horizontal
+                                keyExtractor={(item) => item.key}
+                                onDragEnd={({ data }) => setJumbledWords(data)}
+                                style={{
+                                    alignSelf: "center",
+                                    margin: 18,
+                                }}
+                            />
+                        </GestureHandlerRootView>
+                        <TouchableOpacity onPress={() => checkAnswer()}>
+                            <Text
+                                style={{
+                                    alignSelf: "center",
+                                    width: 50,
+                                    height: 50,
+                                    backgroundColor: "aqua",
+                                    shadowColor: "#000000",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 10,
+                                    },
+                                    shadowOpacity: 0.17,
+                                    shadowRadius: 3.05,
+                                    elevation: 10,
+                                    borderRadius: 50,
+                                }}
+                            ></Text>
+                        </TouchableOpacity>
+                    </View>
+                ) : (
+                    <Text>No more sentences to arrange.</Text>
+                )}
 
-            <Modal isVisible={isModalVisible} backdropOpacity={0.1}>
-                {modalContent}
-                <Text>{score}</Text>
-            </Modal>
-            <StatusBar hidden />
+                <Modal isVisible={isModalVisible} backdropOpacity={0.1}>
+                    {modalContent}
+                </Modal>
+                <StatusBar hidden />
+            </ImageBackground>
         </View>
     );
 };
