@@ -219,7 +219,15 @@ const ConstructWords = () => {
                             height: 290,
                             borderRadius: 150,
                             alignSelf: "center",
-                            backgroundColor: "#f2f2f2",
+                            backgroundColor: "white",
+                            shadowColor: "#000000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 10,
+                            },
+                            shadowOpacity: 0.17,
+                            shadowRadius: 3.05,
+                            elevation: 10,
                         }}
                     >
                         <Text
@@ -234,6 +242,9 @@ const ConstructWords = () => {
                                     color: "#ff5722",
                                     fontSize: 28,
                                     fontWeight: "bold",
+                                    textShadowColor: "rgba(0, 0, 0, 0.75)",
+                                    textShadowOffset: { width: 0, height: 1 },
+                                    textShadowRadius: 4,
                                 }}
                             >
                                 {currentWordToConstruct}
