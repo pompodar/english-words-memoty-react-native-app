@@ -46,8 +46,6 @@ export default function App() {
 
     const [sentenceNumber, setSentenceNumber] = useState(0);
 
-    const image = { uri: "../assets/background.jpg" };
-
     useEffect(() => {
         getNextQuestion();
     }, []);
@@ -122,7 +120,7 @@ export default function App() {
                     height: "100%",
                     justifyContent: "center",
                 }}
-                source={image}
+                source={require("../assets/background.jpg")}
                 resizeMode="cover"
             >
                 <View

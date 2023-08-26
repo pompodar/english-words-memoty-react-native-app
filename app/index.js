@@ -6,10 +6,6 @@ import DropDownPicker from "react-native-dropdown-picker";
 import "../style.css";
 
 export default function Home() {
-    const image = {
-        uri: "../assets/background.jpg"
-    };
-
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -44,18 +40,23 @@ export default function Home() {
                     justifyContent: "center",
                     alignItems: "center",
                 }}
-                source={image}
+                source={require("../assets/background.jpg")}
                 resizeMode="cover"
             >
-                <View style={{ width: 150 }}>
+                <View
+                    style={{
+                        width: 150
+                    }}
+                >
                     <Text
                         style={{
                             backgroundColor: "white",
-                            height: 44,
-                            marginTop: 4,
+                            height: 46,
+                            marginBottom: 4,
                             borderRadius: 4,
                             padding: 10,
-                            border: "1px solid black",
+                            borderWidth: 1,
+                            borderStyle: "solid",
                         }}
                         onPress={() => router.push("/alphabet")}
                     >

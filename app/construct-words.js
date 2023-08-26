@@ -262,8 +262,6 @@ const shuffleArray = (array) => {
         </TouchableOpacity>
     );
 
-    const image = {uri: '../assets/background.jpg'};
-
     return (
         <View
             style={{
@@ -287,16 +285,17 @@ const shuffleArray = (array) => {
                     height: "100%",
                     justifyContent: "center",
                 }}
-                source={image}
+                source={require("../assets/background.jpg")}
                 resizeMode="cover"
             >
                 {sentences.length > 0 ? (
                     <View
                         style={{
-                            padding: 30,
-                            width: 290,
-                            height: 290,
-                            borderRadius: 150,
+                            padding: 0,
+                            paddingVertical: 50,
+                            width: 320,
+                            height: 320,
+                            borderRadius: 170,
                             alignSelf: "center",
                             backgroundColor: "white",
                             shadowColor: "#000000",
