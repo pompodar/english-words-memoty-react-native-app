@@ -186,6 +186,7 @@ const shuffleArray = (array) => {
                     elevation: 10,
                 }}
             >
+                <Text style={{ display: "none" }}>dummy</Text>
                 <Text>
                     {isAnswerCorrect ? (
                         <Entypo name="emoji-happy" size={34} color="white" />
@@ -277,7 +278,6 @@ const shuffleArray = (array) => {
                     headerTitleStyle: {
                         fontWeight: "bold",
                     },
-                    // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
                     headerTitle: "Склади слова",
                 }}
             />
@@ -293,7 +293,6 @@ const shuffleArray = (array) => {
                 {sentences.length > 0 ? (
                     <View
                         style={{
-                            backgroundColor: "red",
                             padding: 30,
                             width: 290,
                             height: 290,
@@ -345,9 +344,11 @@ const shuffleArray = (array) => {
                         <TouchableOpacity onPress={() => checkAnswer()}>
                             <Text
                                 style={{
+                                    textAlign: "center",
                                     alignSelf: "center",
                                     width: 50,
                                     height: 50,
+                                    color: "white",
                                     backgroundColor: "aqua",
                                     shadowColor: "#000000",
                                     shadowOffset: {

@@ -7,7 +7,7 @@ import "../style.css";
 
 export default function Home() {
     const image = {
-        uri: "../assets/background.jpg",
+        uri: "../assets/background.jpg"
     };
 
     const [open, setOpen] = useState(false);
@@ -23,7 +23,6 @@ export default function Home() {
     const handleSelect = (itemValue) => {
     setOpen(false);
 
-    // Set the selected value
     setValue(itemValue);
   };
 
@@ -35,7 +34,6 @@ export default function Home() {
                     headerTitleStyle: {
                         fontWeight: "bold",
                     },
-                    // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
                     headerTitle: "Читусик",
                 }}
             />
@@ -50,6 +48,19 @@ export default function Home() {
                 resizeMode="cover"
             >
                 <View style={{ width: 150 }}>
+                    <Text
+                        style={{
+                            backgroundColor: "white",
+                            height: 44,
+                            marginTop: 4,
+                            borderRadius: 4,
+                            padding: 10,
+                            border: "1px solid black",
+                        }}
+                        onPress={() => router.push("/alphabet")}
+                    >
+                        Алфавіт
+                    </Text>
                     <DropDownPicker
                         className="dropdown"
                         open={open}
