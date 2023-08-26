@@ -4,43 +4,113 @@ import { ImageBackground, View, Text, TouchableOpacity } from "react-native";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Modal from "react-native-modal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Link, router } from "expo-router";
+import { Stack, Link, router, useLocalSearchParams } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-const initialSentences = [
-    "рак",
-    "сир",
-    "сон",
-    "бик",
-    "дим",
-    "дах",
-    "дід",
-    "дощ",
-    "душ",
-    "жук",
-    "зуб",
-    "їжа",
-    "кит",
-    "кіт",
-    "лев",
-    "чай",
-    "час",
-    "цар",
-    "сад",
-    "ріг",
-    "піч",
-    "пес",
-    "око",
-    "ніч",
-    "ніс",
-    "ніж",
-    "меч",
-    "мед",
-    "мак",
-    "лук",
-    "ліс",
-];
+const ConstructWords = () => {
+    const { words } = useLocalSearchParams();
+
+    let initialSentences;
+
+    if (words == 3) {
+        initialSentences = [
+            "рак",
+            "сир",
+            "сон",
+            "бик",
+            "дим",
+            "дах",
+            "дід",
+            "дощ",
+            "душ",
+            "жук",
+            "зуб",
+            "їжа",
+            "кит",
+            "кіт",
+            "лев",
+            "чай",
+            "час",
+            "цар",
+            "сад",
+            "ріг",
+            "піч",
+            "пес",
+            "око",
+            "ніч",
+            "ніс",
+            "ніж",
+            "меч",
+            "мед",
+            "мак",
+            "лук",
+            "ліс",
+        ];
+    } else {
+        initialSentences = [
+            "мама",
+            "тато",
+            "баба",
+            "тато",
+            "брат",
+            "день",
+            "ґава",
+            "губи",
+            "гуси",
+            "гриб",
+            "гора",
+            "вухо",
+            "вода",
+            "вовк",
+            "сіль",
+            "вата",
+            "ваза",
+            "ваги",
+            "зима",
+            "змія",
+            "їжак",
+            "кава",
+            "каса",
+            "кіно",
+            "кінь",
+            "клас",
+            "небо",
+            "муха",
+            "миша",
+            "мапа",
+            "ваги",
+            "люди",
+            "лист",
+            "крем",
+            "коза",
+            "ключ",
+            "нога",
+            "нора",
+            "одяг",
+            "олія",
+            "пазл",
+            "птах",
+            "риба",
+            "рука",
+            "село",
+            "цирк",
+            "цвях",
+            "хліб",
+            "хата",
+            "тигр",
+            "стіл",
+            "спис",
+            "сова",
+            "сніг",
+            "слон",
+            "ящик",
+            "якір",
+            "яйце",
+            "язик",
+        ];
+    }
+
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -50,7 +120,7 @@ const shuffleArray = (array) => {
     return array;
 };
 
-const ConstructWords = () => {
+
     const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
 
     const [word, setWord] = useState("");
@@ -191,7 +261,7 @@ const ConstructWords = () => {
         </TouchableOpacity>
     );
 
-    const image = {uri: '../assets/toys-hand-drawn-seamless-pattern-toys-endless-sketch-drawing-texture-childish-background-part-of-set-2BW75R7.jpg'};
+    const image = {uri: '../assets/background.jpg'};
 
     return (
         <View
@@ -201,6 +271,16 @@ const ConstructWords = () => {
                 justifyContent: "center",
             }}
         >
+            <Stack.Screen
+                options={{
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                    // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
+                    headerTitle: "Склади слова",
+                }}
+            />
             <ImageBackground
                 style={{
                     width: "100%",
@@ -235,12 +315,11 @@ const ConstructWords = () => {
                                 alignSelf: "center",
                             }}
                         >
-                            Склади слово:{" "}
                             <Text
                                 style={{
                                     alignSelf: "center",
                                     color: "#ff5722",
-                                    fontSize: 28,
+                                    fontSize: 32,
                                     fontWeight: "bold",
                                     textShadowColor: "rgba(0, 0, 0, 0.75)",
                                     textShadowOffset: { width: 0, height: 1 },
