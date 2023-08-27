@@ -46,6 +46,9 @@ export default function App() {
 
     const [sentenceNumber, setSentenceNumber] = useState(0);
 
+        const [score, setScore] = useState(0);
+
+
     useEffect(() => {
         getNextQuestion();
     }, []);
@@ -66,7 +69,11 @@ export default function App() {
 
     const handleOptionSelect = (selectedOption) => {
         const isCorrect = selectedOption === currentLetter;
+
         setIsAnswerCorrect(isCorrect);
+        if (isCorrect) {
+            setScore(score + 1);
+        }
         setIsModalVisible(true);
     };
 
@@ -78,7 +85,7 @@ export default function App() {
     function getRandomOptions(answer) {
         const options = [answer];
 
-        while (options.length < 4) {
+        while (options.length < 3) {
             const randomIndex = Math.floor(Math.random() * alphabet.length);
             const randomOption = alphabet[randomIndex];
             if (!options.includes(randomOption)) {
@@ -140,8 +147,40 @@ export default function App() {
                         shadowOpacity: 0.17,
                         shadowRadius: 3.05,
                         elevation: 10,
+                        position: "relative",
                     }}
                 >
+                    <View
+                        style={{
+                            shadowColor: "#000000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 10,
+                            },
+                            shadowOpacity: 0.17,
+                            shadowRadius: 3.05,
+                            elevation: 10,
+                            position: "absolute",
+                            top: 24,
+                            right: 24,
+                            fontSize: 18,
+                            width: 50,
+                            height: 50,
+                            backgroundColor: "#03a9f4",
+                            borderRadius: 50,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Text
+                            style={{
+                                color: "white",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            {score + " / 5"}
+                        </Text>
+                    </View>
                     <Text
                         style={{
                             alignSelf: "center",
@@ -151,6 +190,7 @@ export default function App() {
                             textShadowColor: "rgba(0, 0, 0, 0.75)",
                             textShadowOffset: { width: 0, height: 1 },
                             textShadowRadius: 4,
+                            marginBottom: 12,
                         }}
                     >
                         {currentLetter}
@@ -162,7 +202,7 @@ export default function App() {
                                     alignSelf: "center",
                                     width: 50,
                                     height: 40,
-                                    marginTop: 4,
+                                    marginTop: 14,
                                     color: "white",
                                     textAlign: "center",
                                     textAlignVertical: "center",

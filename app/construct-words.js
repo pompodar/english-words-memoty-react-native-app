@@ -306,8 +306,40 @@ const shuffleArray = (array) => {
                             shadowOpacity: 0.17,
                             shadowRadius: 3.05,
                             elevation: 10,
+                            position: "relative",
                         }}
                     >
+                        <View
+                            style={{
+                                shadowColor: "#000000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 10,
+                                },
+                                shadowOpacity: 0.17,
+                                shadowRadius: 3.05,
+                                elevation: 10,
+                                position: "absolute",
+                                top: 24,
+                                right: 24,
+                                fontSize: 18,
+                                width: 50,
+                                height: 50,
+                                backgroundColor: "#03a9f4",
+                                borderRadius: 50,
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "white",
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                {score + " / 5"}
+                            </Text>
+                        </View>
                         <Text
                             style={{
                                 alignSelf: "center",
