@@ -226,6 +226,9 @@ export default function App() {
                                     onPress={() => handleOptionSelect(option)}
                                     style={{
                                         color: "white",
+                                        lineHeight: "3",
+                                        width: "100%",
+                                        textAlign: "center"
                                     }}
                                 >
                                     {option}
