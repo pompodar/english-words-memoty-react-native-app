@@ -6,6 +6,26 @@ import DropDownPicker from "react-native-dropdown-picker";
 import "../style.css";
 
 export default function Home() {
+    const [openFirst, setOpenFirst] = useState(false);
+    const [valueFirst, setValueFirst] = useState(null);
+    const [itemsFirst, setItemsFirst] = useState([
+        { label: "Apple", value: "apple" },
+        { label: "Banana", value: "banana" },
+    ]);
+
+    const [openSecond, setOpenSecond] = useState(false);
+    const [valueSecond, setValueSecond] = useState(null);
+    const [itemsSecond, setItemsSecond] = useState([
+        { label: "Potato", value: "potato" },
+        { label: "Carrot", value: "Carrot" },
+    ]);
+
+    const [openThird, setOpenThird] = useState(false);
+    const [valueThird, setValueThird] = useState(null);
+    const [itemsThird, setItemsThird] = useState([
+        { label: "Sunflower", value: "sunflower" },
+        { label: "Lily", value: "lily" },
+    ]);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -16,11 +36,16 @@ export default function Home() {
         { label: "на 4 букви", value: "/construct-words?words=4" },
     ]);
 
-    const handleSelect = (itemValue) => {
-    setOpen(false);
+    const [open2, setOpen2] = useState(false);
+    const [value2, setValue2] = useState(null);
+    const [items2, setItems2] = useState([
+        {
+            label: "знайди букви",
+            value: "/alphabet",
+        },
+        { label: "запам'ятай букви", value: "/memory-game" },
+    ]);
 
-    setValue(itemValue);
-  };
 
     return (
         <View style={{ width: "100%", height: "100%" }}>
@@ -45,34 +70,44 @@ export default function Home() {
             >
                 <View
                     style={{
-                        width: 150
+                        width: 150,
                     }}
                 >
-                    <Text
-                        style={{
-                            backgroundColor: "white",
-                            height: 46,
-                            marginBottom: 4,
-                            borderRadius: 4,
-                            padding: 10,
-                            borderWidth: 1,
-                            borderStyle: "solid",
-                        }}
-                        onPress={() => router.push("/alphabet")}
-                    >
-                        Алфавіт
-                    </Text>
                     <DropDownPicker
-                        className="dropdown"
+                        open={open2}
+                        placeholder="Алфавіт"
+                        value={value2}
+                        items={items2}
+                        placeholderStyle={{
+                            color: "#ff5722",
+                            fontWeight: "bold",
+                        }}
+                        listItemLabelStyle={{
+                            color: "#ff5722",
+                            fontWeight: "bold",
+                        }}
+                        setOpen={setOpen2}
+                        setValue={setValue2}
+                        setItems={setItems2}
+                        onChangeValue={(value) => {
+                            router.push(value);
+                        }}
+                        zIndex={2000}
+                        zIndexInverse={4000}
+                    />
+                    <View style={{ margin: 4 }} />
+                    <DropDownPicker
                         open={open}
                         placeholder="Склади слова"
                         value={value}
                         items={items}
-                        disabledStyle={{
-                            opacity: 0.5,
+                        placeholderStyle={{
+                            color: "#ff5722",
+                            fontWeight: "bold",
                         }}
-                        itemStyle={{
-                            color: "red",
+                        listItemLabelStyle={{
+                            color: "#ff5722",
+                            fontWeight: "bold",
                         }}
                         setOpen={setOpen}
                         setValue={setValue}
@@ -80,6 +115,8 @@ export default function Home() {
                         onChangeValue={(value) => {
                             router.push(value);
                         }}
+                        zIndex={1000}
+                        zIndexInverse={3000}
                     />
                     <StatusBar hidden />
                 </View>
