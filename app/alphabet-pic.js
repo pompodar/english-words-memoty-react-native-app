@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, ImageBackground, View, Text, Button } from "react-native";
+import { Image, TouchableOpacity, ImageBackground, View, Text, Button } from "react-native";
 import Modal from "react-native-modal";
 import { Stack, Link, router } from "expo-router";
 import { Entypo } from "@expo/vector-icons";
@@ -12,10 +12,8 @@ const alphabet = [
     "Г",
     "Ґ",
     "Д",
-    "Е",
     "Ж",
     "З",
-    "И",
     "І",
     "Ї",
     "К",
@@ -34,12 +32,46 @@ const alphabet = [
     "Ч",
     "Ш",
     "Щ",
-    "Ь",
     "Ю",
     "Я",
 ];
 
-export default function App() {
+const imagePaths = {
+    A: require("../assets/alph-pic/акула.png"),
+    Б: require("../assets/alph-pic/бик.png"),
+    В: require("../assets/alph-pic/вовк.png"),
+    Г: require("../assets/alph-pic/гриб.png"),
+    Ґ: require("../assets/alph-pic/ґудзик.png"),
+    Д: require("../assets/alph-pic/дим.png"),
+    Є: require("../assets/alph-pic/єнот.png"),
+    Ж: require("../assets/alph-pic/жираф.png"),
+    З: require("../assets/alph-pic/зуб.png"),
+    Ї: require("../assets/alph-pic/їжак.png"),
+    І: require("../assets/alph-pic/індик.png"),
+    Й: require("../assets/alph-pic/йогурт.png"),
+    К: require("../assets/alph-pic/кіт.png"),
+    Л: require("../assets/alph-pic/лев.png"),
+    М: require("../assets/alph-pic/мед.png"),
+    Н: require("../assets/alph-pic/ніж.png"),
+    О: require("../assets/alph-pic/око.png"),
+    П: require("../assets/alph-pic/пес.png"),
+    Р: require("../assets/alph-pic/ріг.png"),
+    С: require("../assets/alph-pic/слон.png"),
+    Т: require("../assets/alph-pic/тигр.png"),
+    У: require("../assets/alph-pic/удав.png"),
+    Ф: require("../assets/alph-pic/фарба.png"),
+    Х: require("../assets/alph-pic/хліб.png"),
+    Ц: require("../assets/alph-pic/цап.png"),
+    Ч: require("../assets/alph-pic/чай.png"),
+    Ш: require("../assets/alph-pic/шкарпетка.png"),
+    Щ: require("../assets/alph-pic/щит.png"),
+    Ю: require("../assets/alph-pic/юшка.png"),
+    Я: require("../assets/alph-pic/яблуко.png"),
+};
+
+export default function AphPic() {
+    
+
     const [currentLetter, setCurrentLetter] = useState("");
     const [options, setOptions] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -105,6 +137,8 @@ export default function App() {
         return array;
     }
 
+     const imageSource = imagePaths[currentLetter];
+
     return (
         <View
             style={{
@@ -119,7 +153,7 @@ export default function App() {
                     headerTitleStyle: {
                         fontWeight: "bold",
                     },
-                    headerTitle: "Алфавіт",
+                    headerTitle: "Алфавіт з картинками",
                 }}
             />
             <ImageBackground
@@ -182,20 +216,15 @@ export default function App() {
                             {score + " / 5"}
                         </Text>
                     </View>
-                    <Text
+                    <Image
                         style={{
+                            width: 120,
+                            height: 120,
+                            marginTop: -50,
                             alignSelf: "center",
-                            color: "#ff5722",
-                            fontSize: 32,
-                            fontWeight: "bold",
-                            textShadowColor: "rgba(0, 0, 0, 0.75)",
-                            textShadowOffset: { width: 0, height: 1 },
-                            textShadowRadius: 4,
-                            marginBottom: 12,
                         }}
-                    >
-                        {currentLetter}
-                    </Text>
+                        source={imageSource}
+                    />
                     <TouchableOpacity>
                         {options.map((option, index) => (
                             <View
@@ -229,7 +258,7 @@ export default function App() {
                                         color: "white",
                                         lineHeight: "3",
                                         width: "100%",
-                                        textAlign: "center"
+                                        textAlign: "center",
                                     }}
                                 >
                                     {option}

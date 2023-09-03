@@ -43,6 +43,10 @@ export default function Home() {
             label: "знайди букви",
             value: "/alphabet",
         },
+        {
+            label: "знайди букви за картинкою",
+            value: "/alphabet-pic",
+        },
         { label: "запам'ятай букви", value: "/memory-game" },
     ]);
 
@@ -78,12 +82,19 @@ export default function Home() {
                         placeholder="Алфавіт"
                         value={value2}
                         items={items2}
+                        labelStyle={{
+                            color: "#ff5722",
+                            fontWeight: "bold",
+                        }}
                         placeholderStyle={{
                             color: "#ff5722",
                             fontWeight: "bold",
                         }}
                         listItemLabelStyle={{
                             color: "#ff5722",
+                            fontWeight: "bold",
+                        }}
+                        modalTitleStyle={{
                             fontWeight: "bold",
                         }}
                         setOpen={setOpen2}
@@ -101,6 +112,10 @@ export default function Home() {
                         placeholder="Склади слова"
                         value={value}
                         items={items}
+                        labelStyle={{
+                            color: "#ff5722",
+                            fontWeight: "bold",
+                        }}
                         placeholderStyle={{
                             color: "#ff5722",
                             fontWeight: "bold",
