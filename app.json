@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "nre-react-native",
-    "slug": "nre-react-native",
+    "name": "english-words-memory-game",
+    "slug": "english-words-memory-game",
     "version": "1.0.0",
     "scheme": "your-app-scheme",
     "orientation": "portrait",
@@ -23,15 +23,18 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.poedgar.nrereactnative"
+      "package": "com.poedgar.englishwordsmemorygame"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
     "extra": {
+      "router": {
+        "origin": false
+      },
       "eas": {
-        "projectId": "273f8b11-c64b-4e0e-9f1a-76b2fe80dd5a"
+        "projectId": "ee5ed4b7-664e-46d2-b54e-ecd34fa6a0c7"
       }
     },
     "plugins": [

@@ -1,141 +1,164 @@
-import { Stack, Link, router } from "expo-router";
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View, Text, TouchableOpacity } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import DropDownPicker from "react-native-dropdown-picker";
-import "../style.css";
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    FlatList
+} from "react-native";
+import { Stack } from "expo-router";
+import wordPairs from "./words";
 
-export default function Home() {
-    const [openFirst, setOpenFirst] = useState(false);
-    const [valueFirst, setValueFirst] = useState(null);
-    const [itemsFirst, setItemsFirst] = useState([
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
+
+const generateCards = () => {
+    // Shuffle the wordPairs array
+    const shuffledWordPairs = shuffleArray(wordPairs);
+
+    // Select the first 6 pairs to create the cards
+    const selectedPairs = shuffledWordPairs.slice(0, 9);
+
+    // Create cards from the selected pairs
+    const cards = selectedPairs.flatMap((pair, index) => [
+        { word: pair.English, language: "english", index },
+        { word: pair.Ukrainian, language: "ukrainian", index },
     ]);
 
-    const [openSecond, setOpenSecond] = useState(false);
-    const [valueSecond, setValueSecond] = useState(null);
-    const [itemsSecond, setItemsSecond] = useState([
-        { label: "Potato", value: "potato" },
-        { label: "Carrot", value: "Carrot" },
-    ]);
+    // Shuffle the cards array
+    const shuffledCards = shuffleArray(cards);
 
-    const [openThird, setOpenThird] = useState(false);
-    const [valueThird, setValueThird] = useState(null);
-    const [itemsThird, setItemsThird] = useState([
-        { label: "Sunflower", value: "sunflower" },
-        { label: "Lily", value: "lily" },
-    ]);
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-        {
-            label: "на 3 букви",
-            value: "/construct-words?words=3",
-        },
-        { label: "на 4 букви", value: "/construct-words?words=4" },
-    ]);
+    return shuffledCards;
+};
 
-    const [open2, setOpen2] = useState(false);
-    const [value2, setValue2] = useState(null);
-    const [items2, setItems2] = useState([
-        {
-            label: "знайди букви",
-            value: "/alphabet",
-        },
-        {
-            label: "знайди букви за картинкою",
-            value: "/alphabet-pic",
-        },
-        { label: "запам'ятай букви", value: "/memory-game" },
-    ]);
+const MemoryGame = () => {
+    const [cards, setCards] = useState(generateCards());
+    const [flippedIndices, setFlippedIndices] = useState([]);
+    const [disabled, setDisabled] = useState(false);
 
+    useEffect(() => {
+        if (flippedIndices.length === 2) {
+            const [index1, index2] = flippedIndices;
+            const card1 = cards[index1];
+            const card2 = cards[index2];
+            if (card1.index === card2.index) {
+                // Find all matched cards and set them as matched in one update
+                setCards((prevCards) =>
+                    prevCards.map((card) =>
+                        card.matched || card.index === card1.index
+                            ? { ...card, matched: true }
+                            : card
+                    )
+                );
+            }
+
+            setDisabled(true);
+            setTimeout(() => {
+                setFlippedIndices([]);
+                setDisabled(false);
+            }, 1000);
+        }
+    }, [flippedIndices]);
+
+    const handleCardPress = (index) => {
+        if (
+            flippedIndices.length < 2 &&
+            !flippedIndices.includes(index) &&
+            !disabled
+        ) {
+            setFlippedIndices((prev) => [...prev, index]);
+        }
+    };
+
+    const keyExtractor = (item, index) => index.toString();
+
+    const renderItem = ({ item, index }) => {
+        const isFlipped = flippedIndices.includes(index) || item.matched;
+        return (
+            <TouchableOpacity
+                style={[styles.card, isFlipped && styles.cardFlipped]}
+                onPress={() => handleCardPress(index)}
+                disabled={isFlipped || flippedIndices.length >= 2 || disabled}
+            >
+                {isFlipped && <Text style={styles.cardText}>{item.word}</Text>}
+            </TouchableOpacity>
+        );
+    };
 
     return (
-        <View style={{ width: "100%", height: "100%" }}>
+        <View style={styles.container}>
             <Stack.Screen
                 options={{
                     headerTintColor: "#fff",
                     headerTitleStyle: {
                         fontWeight: "bold",
                     },
-                    headerTitle: "Читусик",
+                    headerTitle: "Babbler",
                 }}
             />
-            <ImageBackground
+            <View
                 style={{
-                    width: "100%",
-                    height: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    position: "absolute",
+                    width: 320,
+                    height: 320,
+                    backgroundColor: "aqua",
+                    borderRadius: 200,
+                    shadowColor: "#000000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 10,
+                    },
+                    shadowOpacity: 0.17,
+                    shadowRadius: 3.05,
+                    elevation: 10,
                 }}
-                source={require("../assets/background.jpg")}
-                resizeMode="cover"
-            >
-                <View
-                    style={{
-                        width: 150,
-                    }}
-                >
-                    <DropDownPicker
-                        open={open2}
-                        placeholder="Алфавіт"
-                        value={value2}
-                        items={items2}
-                        labelStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        placeholderStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        listItemLabelStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        modalTitleStyle={{
-                            fontWeight: "bold",
-                        }}
-                        setOpen={setOpen2}
-                        setValue={setValue2}
-                        setItems={setItems2}
-                        onChangeValue={(value) => {
-                            router.push(value);
-                        }}
-                        zIndex={2000}
-                        zIndexInverse={4000}
-                    />
-                    <View style={{ margin: 4 }} />
-                    <DropDownPicker
-                        open={open}
-                        placeholder="Склади слова"
-                        value={value}
-                        items={items}
-                        labelStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        placeholderStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        listItemLabelStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setItems}
-                        onChangeValue={(value) => {
-                            router.push(value);
-                        }}
-                        zIndex={1000}
-                        zIndexInverse={3000}
-                    />
-                    <StatusBar hidden />
-                </View>
-            </ImageBackground>
+            ></View>
+            <FlatList
+                style={{position: "absolute"}}
+                data={cards}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+                numColumns={3} // Adjust the number of columns as per your design
+            />
         </View>
     );
-}
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+    },
+    card: {
+        width: 90,
+        height: 60,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#e91e63",
+        margin: 5,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.17,
+        shadowRadius: 3.05,
+        elevation: 10,
+        borderRadius: 4,
+    },
+    cardFlipped: {
+        backgroundColor: "white",
+    },
+    cardText: {
+        fontSize: 14,
+    },
+});
+
+export default MemoryGame;
