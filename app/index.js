@@ -10,11 +10,17 @@ export default function Home() {
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         {
-            label: "Intermediate (3000)",
+            label: "English Ukrainian",
             value: "/3000_EnglUkrGame",
         },
-        { label: "на 4 букви", value: "/construct-words?words=4" },
-        { label: "за картинкою", value: "/construct-words-pic" },
+        {
+            label: "English Polish",
+            value: "/3000_EnglPolGame",
+        },
+        {
+            label: "English Czech",
+            value: "/3000_EnglCzGame",
+        },
     ]);
 
     const [open2, setOpen2] = useState(false);
@@ -58,35 +64,7 @@ export default function Home() {
                         width: 150,
                     }}
                 >
-                    <DropDownPicker
-                        open={open2}
-                        placeholder="Memory Games"
-                        value={value2}
-                        items={items2}
-                        labelStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        placeholderStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        listItemLabelStyle={{
-                            color: "#ff5722",
-                            fontWeight: "bold",
-                        }}
-                        modalTitleStyle={{
-                            fontWeight: "bold",
-                        }}
-                        setOpen={setOpen2}
-                        setValue={setValue2}
-                        setItems={setItems2}
-                        onChangeValue={(value) => {
-                            router.push(value);
-                        }}
-                        zIndex={2000}
-                        zIndexInverse={4000}
-                    />
+                    
                     <View style={{ margin: 4 }} />
                     <DropDownPicker
                         open={open}

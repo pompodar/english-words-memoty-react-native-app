@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "english-words-memory-game",
-    "slug": "english-words-memory-game",
+    "name": "Babbler",
+    "slug": "babbler",
     "version": "1.0.0",
     "scheme": "your-app-scheme",
     "orientation": "portrait",
@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.poedgar.englishwordsmemorygame"
+      "package": "com.poedgar.babbler"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -34,7 +34,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "ee5ed4b7-664e-46d2-b54e-ecd34fa6a0c7"
+        "projectId": "4ee6a2ed-e59f-491c-81de-796147f791a4"
       }
     },
     "plugins": [
