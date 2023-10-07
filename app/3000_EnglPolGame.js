@@ -10,6 +10,7 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import wordPairs from "../dicts/3000_EnglPolDict/3000_EnglPolDict.json";
+import LottieView from "lottie-react-native";
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -84,6 +85,10 @@ const MemoryGame = () => {
                             : card
                     )
                 );
+
+                setMatchedCardCount(
+                    (prevCount) => prevCount + 2
+                );
             }
 
             setDisabled(true);
@@ -101,6 +106,15 @@ const MemoryGame = () => {
             !disabled
         ) {
             setFlippedIndices((prev) => [...prev, index]);
+        }
+
+        if (matchedCardCount == cards.length - 2) {
+            setLastTwoCardsMatched((prevCount) => prevCount + 1);
+        }
+
+        if (isGameWon()) {
+            // Trigger the confetti animation when the game is won
+            triggerConfetti();
         }
     };
 
@@ -128,6 +142,29 @@ const MemoryGame = () => {
         setDisabled(false);
     };
 
+    const confettiRef = useRef(null);
+
+    function triggerConfetti() {
+        if (confettiRef.current) {
+            confettiRef.current.play(0);
+        }
+    }
+
+    const [matchedCardCount, setMatchedCardCount] = useState(0);
+
+    const [lastTwoCardsMatched, setLastTwoCardsMatched] = useState(0);
+
+    const isGameWon = () => {
+        console.log(lastTwoCardsMatched);
+        // Check if all cards are matched
+        if (matchedCardCount === cards.length - 2 && lastTwoCardsMatched == 1) {
+            // Trigger the confetti animation when all cards are matched
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     return (
         <View style={styles.container}>
             <Stack.Screen
@@ -138,6 +175,21 @@ const MemoryGame = () => {
                     },
                     headerTitle: "Babbler",
                 }}
+            />
+            <LottieView
+                ref={confettiRef}
+                resizeMode="cover"
+                loop={false}
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    zIndex: 1000,
+                    pointerEvents: "none",
+                }}
+                source={require("../assets/confetti.json")}
             />
             <View
                 style={{
