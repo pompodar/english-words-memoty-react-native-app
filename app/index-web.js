@@ -4,9 +4,9 @@ import { ImageBackground, View, Text, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import DropDownPicker from "react-native-dropdown-picker";
 import "../style.css";
-import LottieView from "lottie-react-native";
+import LottieView from "react-native-web-lottie";
 
-export default function Home() {
+export default function Home() {    
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -37,6 +37,7 @@ export default function Home() {
         },
         { label: "запам'ятай букви", value: "/memory-game" },
     ]);
+
 
     return (
         <View style={{ width: "100%", height: "100%" }}>
