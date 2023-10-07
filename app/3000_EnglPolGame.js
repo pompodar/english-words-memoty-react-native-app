@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     View,
     Text,
@@ -115,6 +115,7 @@ const MemoryGame = () => {
         if (isGameWon()) {
             // Trigger the confetti animation when the game is won
             triggerConfetti();
+            stopTimer();
         }
     };
 

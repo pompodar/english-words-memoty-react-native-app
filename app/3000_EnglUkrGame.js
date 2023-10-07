@@ -113,6 +113,7 @@ const MemoryGame = () => {
         if (isGameWon()) {
             // Trigger the confetti animation when the game is won
             triggerConfetti();
+            stopTimer();
         }
     };
 
