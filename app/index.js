@@ -11,31 +11,9 @@ export default function Home() {
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         {
-            label: "English Ukrainian",
-            value: "/3000_EnglUkrGame",
+            label: "J. Joyce The Sisters",
+            value: "/book?id=1&secondId=2",
         },
-        {
-            label: "English Polish",
-            value: "/3000_EnglPolGame",
-        },
-        {
-            label: "English Czech",
-            value: "/3000_EnglCzGame",
-        },
-    ]);
-
-    const [open2, setOpen2] = useState(false);
-    const [value2, setValue2] = useState(null);
-    const [items2, setItems2] = useState([
-        {
-            label: "знайди букви",
-            value: "/alphabet",
-        },
-        {
-            label: "знайди букви за картинкою",
-            value: "/alphabet-pic",
-        },
-        { label: "запам'ятай букви", value: "/memory-game" },
     ]);
 
     return (
@@ -50,7 +28,7 @@ export default function Home() {
                 }}
             />
             <LottieView
-                loop
+                loop={false}
                 autoPlay
                 style={{
                     position: "absolute",
@@ -60,7 +38,7 @@ export default function Home() {
                     zIndex: 1000,
                     pointerEvents: "none",
                 }}
-                source={require("../assets/start.json")}
+                source={require("../assets/book.json")}
             />
             <ImageBackground
                 style={{
@@ -80,7 +58,7 @@ export default function Home() {
                     <View style={{ margin: 4 }} />
                     <DropDownPicker
                         open={open}
-                        placeholder="Memory Games"
+                        placeholder="твори"
                         value={value}
                         items={items}
                         labelStyle={{

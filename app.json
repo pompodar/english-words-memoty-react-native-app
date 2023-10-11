@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Babbler",
-    "slug": "babbler",
+    "name": "Bibookish",
+    "slug": "bibookish",
     "version": "1.0.1",
     "scheme": "your-app-scheme",
     "orientation": "portrait",
@@ -19,12 +19,12 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.poedgar.babbler"
+      "package": "com.poedgar.bibookish"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -35,7 +35,6 @@
         "origin": false
       },
       "eas": {
-        "projectId": "4ee6a2ed-e59f-491c-81de-796147f791a4"
       }
     },
     "plugins": [

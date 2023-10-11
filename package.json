@@ -1,5 +1,5 @@
 {
-  "name": "Babbler",
+  "name": "Bibookish",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -28,7 +28,8 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
-    "react-native-web-lottie": "^1.4.4"
+    "react-native-web-lottie": "^1.4.4",
+    "@react-native-async-storage/async-storage": "1.18.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
